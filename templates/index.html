@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手机管理系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.min.css">
+    <script src="https://cdn.staticfile.org/layui/2.5.7/layui.min.js"></script>
+</head>
+<body>
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <h1 style="text-align: center">手机信息管理系统</h1>
+                <h2 style="text-align: center">Python+HTML</h2>
+                <h3 style="text-align: center">作者：朱俊杰</h3>
+                <a href="/add" class="layui-btn layui-btn-normal layui-btn-radius">添加</a>
+                <a href="/echarts" class="layui-btn layui-btn-warm layui-btn-radius">图表</a>
+                <a href="{{ url_for('logout') }}" class="layui-btn layui-btn-danger layui-btn-radius">退出</a>
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>品牌</th>
+                            <th>型号</th>
+                            <th>价格</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for phone in phones %}
+                        <tr>
+                            <td>{{ phone.id }}</td>
+                            <td>{{ phone.brand }}</td>
+                            <td>{{ phone.model }}</td>
+                            <td>{{ phone.price }}</td>
+                            <td>
+                                <a href="{{ url_for('edit', id=phone.id) }}" class="layui-btn layui-btn-radius">修改</a>
+                                <a href="{{ url_for('delete', id=phone.id) }}" class="layui-btn layui-btn-danger layui-btn-radius" onclick="return confirmDelete()">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function confirmDelete() {
+        return confirm("确定删除吗？");
+    }
+</script>
+</html>
